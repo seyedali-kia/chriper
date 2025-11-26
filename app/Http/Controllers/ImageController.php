@@ -34,6 +34,11 @@ class ImageController extends Controller
             ]
         ]);
 
+        //پاک کردن پروفایل قبلی
+        if (auth()->user()->profile_path) {
+            Storage::disk('public')->delete(auth()->user()->profile_path);
+        }
+
         // ذخیره نام سمت کاربر
         $originalName = $request->image->getClientOriginalName();
 

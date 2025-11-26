@@ -25,6 +25,12 @@ class ImageController extends Controller
                 'image',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048',
+                function ($attribute, $value, $fail) {
+                    $filename = $value->getClientOriginalName();
+                    if (Storage::disk('public')->exists('profile/' . $filename)) {
+                        $fail("this file has been uploaded");
+                    }
+                }
             ]
         ]);
 
@@ -32,7 +38,7 @@ class ImageController extends Controller
         $originalName = $request->image->getClientOriginalName();
 
         // 2. آپلود فایل و گرفتن مسیر
-        $path = $request->image->storeAs('profile' , $originalName );
+        $path = $request->image->storeAs('profile' , $originalName , 'public');
 
         // 3. ذخیره مسیر در کاربر جاری (لاگین‌شده)
         

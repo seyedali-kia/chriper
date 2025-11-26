@@ -59,6 +59,9 @@
                 <span class="text-sm">{{ auth()->user()->name }}</span>
                 <form method="POST" action="/logout" class="inline">
                     @csrf
+                    @if (!isset($hideButton) || !$hideButton)
+                        <a href="/upload-profile" class="btn btn-ghost btn-sm">Set Profile</a>
+                    @endif
                     <button type="submit" class="btn btn-ghost btn-sm">Logout</button>
                 </form>
             @else

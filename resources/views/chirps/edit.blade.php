@@ -1,5 +1,5 @@
 
-<x-layout>
+<x-layout :hideButton="true">
     <x-slot:title>
         Edit Chirp
     </x-slot:title>

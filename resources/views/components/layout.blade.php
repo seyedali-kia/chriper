@@ -56,10 +56,19 @@
         </div>
         <div class="navbar-end gap-4 px-4">
             @auth
-                <span class="text-sm">{{ auth()->user()->name }}</span>
+                <span class="text-tm">{{ auth()->user()->name }}</span>
+                <div class="avatar">
+                    <div class="size-10 rounded-xl">
+                        <img src={{ auth()->user()->profile_path ?  asset('storage/' . auth()->user()->profile_path)  : 'https://avatars.laravel.cloud/'. urlencode(auth()->user()->email) }}
+                            alt="{{ auth()->user()->name }}'s avatar" class="rounded-lg" />
+                    </div>
+                </div>
                 <form method="POST" action="/logout" class="inline">
                     @csrf
                     @if (!isset($hideButton) || !$hideButton)
+                        @if ( !is_null(auth()->user()->profile_path)){{-- @if (auth()->user()->profile_path) --}}
+                            <a href="/remove-profile" class="btn btn-ghost btn-sm">Remove Profile</a>
+                        @endif
                         <a href="/upload-profile" class="btn btn-ghost btn-sm">Set Profile</a>
                     @endif
                     <button type="submit" class="btn btn-ghost btn-sm">Logout</button>

@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function(){
     Route::delete('/chirps/{chirp}',[ChirpController::class, 'destroy']);
     Route::get('/upload-profile',[ImageController::class,'uploadForm'])->name('upload.form');
     Route::post('/upload-profile',[ImageController::class,'upload'])->name('upload');
+    Route::get('remove-profile',[ImageController::class,'destroy']);
 
 });
 

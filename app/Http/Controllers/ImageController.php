@@ -50,6 +50,14 @@ class ImageController extends Controller
         auth()->user()->update(['profile_path' => $path]);
 
         // 4. ریدایرکت با پیام موفقیت
-        return redirect('/')->with('success', 'profile successfully uploaded.');
+        return redirect('/')->with('success', 'Profile successfully uploaded.');
+    }
+    public function destroy ()
+    {
+        //پاک کردن پروفایل کاربر
+        Storage::disk('public')->delete(auth()->user()->profile_path);
+        auth()->user()->update(['profile_path' => null]);
+
+        return redirect('/')->with('success','Profile successfully deleted.');
     }
 }
